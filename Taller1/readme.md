@@ -25,8 +25,8 @@ This is a simple C++ program that calculates the total salary of a group of peop
 You can compile and run the program using any C++ compiler. Here's how you can do it using g++:
 
 ```bash
-g++ calc.cpp -o salary_calculator
-./salary_calculator
+g++ calc.cpp -o CalcWithoutGUI
+./CalcWithoutGUI
 ```
 
 ## Example
