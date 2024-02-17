@@ -1,13 +1,14 @@
 #ifndef SDL_mainScreen
 #define SDL_mainScreen
 #include "SDL_Exception.h"
+#include "inputForText.h"
 #include "toRender.h"
 #include <tuple>
 
 class mainScreen : public toRender {
 public:
     void Init();
-    void HandleEvents();
+    void HandleEvents(SDL_Rect rect1, SDL_Rect rect2, inputForText object1,inputForText object2);
 
 
     void Update();
@@ -15,7 +16,7 @@ public:
 
     void Exit();
 
-    SDL_Rect find(SDL_Rect rect1, SDL_Rect rect2);
+    void find(SDL_Rect rect1, SDL_Rect rect2, inputForText object1, inputForText object2);
 
     bool IsRunning();
 
@@ -38,7 +39,7 @@ private:
 
     int mouseX,mouseY;
     SDL_Rect rects[2];
-
+    SDL_Rect nullRect;
     bool isRunning;
 
     SDL_Window *window;

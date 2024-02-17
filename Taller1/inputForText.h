@@ -14,7 +14,7 @@ class inputForText : public toRender{
 
     void Exit();
 
-    void HandleEvents(SDL_Renderer* renderer,SDL_Window* window,SDL_Rect rect);
+    void HandleEvents(SDL_Renderer* renderer,SDL_Window* window);
 
     SDL_Rect getRect();
 

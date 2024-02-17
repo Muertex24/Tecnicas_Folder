@@ -3,6 +3,7 @@
 #include "SDL_Exception.h"
 #include "SDL2/SDL_image.h"
 #include <SDL2/SDL_ttf.h>
+#include <iostream>
 
 
 void mainScreen::Init() {
@@ -45,7 +46,6 @@ void mainScreen::Render(){
 }
 
 void mainScreen::Update(){
-    
     SDL_RenderPresent(renderer);
 }
 
@@ -55,33 +55,21 @@ void mainScreen::clearRenderer(){
 
 
 
-SDL_Rect mainScreen :: find(SDL_Rect rect1, SDL_Rect rect2){
+void mainScreen :: find(SDL_Rect rect1, SDL_Rect rect2, inputForText object1,inputForText object2){
     SDL_GetMouseState(&mouseX,&mouseY);
-    SDL_Rect nullRect = {0,0,0,0};
+    nullRect = {0,0,0,0};
     rects[0] = rect1;
     rects[1] = rect2;
-
-    bool finded = false;
-    for (size_t i = 0; i <= sizeof(rects); i++)
-    {
-        if(mouseX >= rect1.x && mouseY >= rect1.y &&mouseX <= (rect1.w+rects[i].x) && mouseY <= rect1.y+rects->h){
-            finded = true;
-        };
-        if(mouseX >= rect2.x && mouseY >= rect2.y &&mouseX <= (rect2.w+rects[i].x) && mouseY <= rect2.y+rects->h){
-            finded = true;
-        };
-        if(finded){
-            nullRect.x = rects[i].x;
-            nullRect.y = rects[i].y;
-            nullRect.w = rects[i].w;
-            nullRect.h = rects[i].h;
+        if(mouseX >= rect1.x && mouseY >= rect1.y &&mouseX <= (rect1.w+rect1.x) && mouseY <= rect1.y+rect1.h){
+            object1.HandleEvents(renderer,window);
         }
-    }
-    return rects[0];
+        if(mouseX >= rect2.x && mouseY >= rect2.y &&mouseX <= (rect2.w+rect2.x) && mouseY <= rect2.y+rect1.h){
+            object2.HandleEvents(renderer,window);
+        };
 }
 
 
-void mainScreen::HandleEvents() {
+void mainScreen::HandleEvents(SDL_Rect rect1, SDL_Rect rect2, inputForText object1,inputForText object2) {
     SDL_Event event;
     SDL_GetMouseState(&mouseX,&mouseY);
 
@@ -94,6 +82,19 @@ void mainScreen::HandleEvents() {
             isRunning = false;
             break;
         case SDL_MOUSEBUTTONDOWN:
+            std::cout<< event.type << std::endl;
+            if(event.button.button == SDL_BUTTON_LEFT){
+                SDL_GetMouseState(&mouseX,&mouseY);
+                nullRect = {0,0,0,0};
+                rects[0] = rect1;
+                rects[1] = rect2;
+                if(mouseX >= rect1.x && mouseY >= rect1.y &&mouseX <= (rect1.w+rect1.x) && mouseY <= rect1.y+rect1.h){
+                    object1.HandleEvents(renderer,window);
+                }
+                if(mouseX >= rect2.x && mouseY >= rect2.y &&mouseX <= (rect2.w+rect2.x) && mouseY <= rect2.y+rect1.h){
+                    object2.HandleEvents(renderer,window);
+                };
+            }
             break;
         default:
             break;

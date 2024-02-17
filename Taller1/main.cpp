@@ -35,9 +35,7 @@ int main(int argc, char *args[]) {
             howMuch.Render(mainscreen.getRenderer(),mainscreen.getWindow(),2,2,-0.105,0);
             moneyPerHour.Render(mainscreen.getRenderer(),mainscreen.getWindow(),500,300);
             peopleCount.Render(mainscreen.getRenderer(),mainscreen.getWindow(),500,190);
-            moneyPerHour.HandleEvents(mainscreen.getRenderer(),mainscreen.getWindow(),mainscreen.find(peopleCount.getRect(),moneyPerHour.getRect()));
-            // peopleCount.HandleEvents(mainscreen.getRenderer(),mainscreen.getWindow(),mainscreen.find());
-            mainscreen.HandleEvents();
+            mainscreen.HandleEvents(peopleCount.getRect(),moneyPerHour.getRect(),peopleCount,moneyPerHour);
             mainscreen.Update();
         }
     

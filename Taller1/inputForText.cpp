@@ -3,12 +3,12 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include <iostream>
 
 
 
 void inputForText::Render(SDL_Renderer* renderer,SDL_Window* window, int xAxis, int yAxis){
-    SDL_QueryTexture(textImage, NULL, NULL, &textWidth, &textHeight);
-    position = {xAxis,yAxis,textWidth,textHeight};
+    position = {xAxis,yAxis,100,50};
 
     SDL_RenderCopy(renderer,textImage,NULL,&position);
 }
@@ -18,7 +18,7 @@ SDL_Rect inputForText :: getRect(){
 }
 
 void inputForText::Init(SDL_Renderer * renderer){
-    SDL_StopTextInput();
+    // SDL_StopTextInput();
     textTyped = "";
     typing = TTF_RenderText_Solid(font,textTyped.c_str(),color);
     textImage = SDL_CreateTextureFromSurface(renderer,typing);
@@ -38,7 +38,10 @@ void inputForText::Exit(){
     SDL_StopTextInput();
 }
 
-void inputForText::HandleEvents(SDL_Renderer* renderer,SDL_Window* window , SDL_Rect rect){
+void inputForText::HandleEvents(SDL_Renderer* renderer,SDL_Window* window){
+    bool stillAlive = true;
+    {
+        SDL_StartTextInput();
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
@@ -64,15 +67,16 @@ void inputForText::HandleEvents(SDL_Renderer* renderer,SDL_Window* window , SDL_
             case SDL_QUIT:
                 SDL_Quit();
                 break;
-            case SDL_MOUSEBUTTONDOWN:
-                if(position.x == rect.x && position.y == rect.y){
-                    SDL_StartTextInput();
-                }else{
-                    // SDL_StopTextInput();
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_RETURN)
+                {
+                stillAlive = false;
                 }
+                
                 break;
             default:
                 break;
             }
         }
+    }
 }
