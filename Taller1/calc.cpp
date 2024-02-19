@@ -1,8 +1,22 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
+#include <cctype>
 using namespace std;
 
-double calculateTotalSalary(int numberOfPersons, double hourlySalary, int dailyWorkHours) {
+int numberOfPersons;
+double hourlySalary;
+double dailyWorkHours;
+char continueCalculation;
+double totalSalary;
+double risk;
+double reteica;
+double vat;
+double withholdingTax;
+double totalDeductions;
+double totalSalaryAfterDeductions;
+
+double calculateTotalSalary() {
     return numberOfPersons * hourlySalary * dailyWorkHours;
 }
 
@@ -10,7 +24,7 @@ double calculateVAT(double totalSalaryAfterDeductions) {
     return totalSalaryAfterDeductions * 0.19;
 }
 
-double calculateReteICA(double totalSalaryAfterRisk) {
+double calculateReteICA(double totalSalaryAfterRisk){
     return totalSalaryAfterRisk * 0.01;
 }
 
@@ -22,46 +36,58 @@ double calculateRisk(double totalSalary) {
     return totalSalary * 0.10;
 }
 
-int main() {
-    char continueCalculation;
-    do {
-        int numberOfPersons;
-        double hourlySalary;
-        int dailyWorkHours;
-
+void getData(){
         cout << "Enter the number of persons: ";
-        cin >> numberOfPersons;
+    while (!(cin >> numberOfPersons)) {
+        cout << "Invalid input. Please enter a number: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
-        cout << "Enter the hourly salary: $";
-        cin >> hourlySalary;
+    cout << "Enter the hourly salary: $";
+    while (!(cin >> hourlySalary)) {
+        cout << "Invalid input. Please enter a number: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
-        do {
-            cout << "Enter the daily work hours (not more than 12 hours): ";
-            cin >> dailyWorkHours;
-        } while (dailyWorkHours > 12);
+    do {
+        cout << "Enter the daily work hours (not more than 12 hours): ";
+        while (!(cin >> dailyWorkHours)) {
+            cout << "Invalid input. Please enter a number: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+    } while (dailyWorkHours > 12);
+}
 
-        double totalSalary = calculateTotalSalary(numberOfPersons, hourlySalary, dailyWorkHours);
-        double risk = calculateRisk(totalSalary);
-        totalSalary -= risk;
+void showInfo(){
+    cout << "\nResults:" << endl;
+    cout << fixed << setprecision(2);
+    cout << setw(40) << left << "Total salary before deductions:" << "$" << totalSalary << endl;
+    cout << setw(40) << left << "Risk (10%):" << "$" << risk << endl;
+    cout << setw(40) << left << "ReteICA (1%):" << "$" << reteica << endl;
+    cout << setw(40) << left << "Withholding tax (11%):" << "$" << withholdingTax << endl;
+    cout << setw(40) << left << "VAT (19%):" << "$" << vat << endl;
+    cout << setw(40) << left << "Total deductions:" << "$" << totalDeductions << endl;
+    cout << setw(40) << left << "Total salary after deductions:" << "$" << totalSalaryAfterDeductions << endl;
+}
 
-        double reteica = calculateReteICA(totalSalary);
-        double withholdingTax = calculateWithholdingTax(totalSalary);
-        totalSalary -= (reteica + withholdingTax);
+void doOperations (){
+    totalSalary = calculateTotalSalary();
+    risk = calculateRisk(totalSalary);
+    reteica = calculateReteICA(totalSalary - risk);
+    withholdingTax = calculateWithholdingTax(totalSalary - risk);
+    vat = calculateVAT(totalSalary - (reteica + withholdingTax));
+    totalDeductions = reteica + withholdingTax + vat;
+    totalSalaryAfterDeductions = totalSalary - totalDeductions;
+}
 
-        double vat = calculateVAT(totalSalary);
-
-        cout << "\nResults:" << endl;
-        cout << fixed << setprecision(2);
-        cout << setw(40) << left << "Total salary before deductions:" << "$" << totalSalary << endl;
-        cout << setw(40) << left << "Risk (10%):" << "$" << risk << endl;
-        cout << setw(40) << left << "ReteICA (1%):" << "$" << reteica << endl;
-        cout << setw(40) << left << "Withholding tax (11%):" << "$" << withholdingTax << endl;
-        cout << setw(40) << left << "VAT (19%):" << "$" << vat << endl;
-
-        double totalDeductions = reteica + withholdingTax + vat;
-        double totalSalaryAfterDeductions = totalSalary - totalDeductions;
-        cout << setw(40) << left << "Total deductions:" << "$" << totalDeductions << endl;
-        cout << setw(40) << left << "Total salary after deductions:" << "$" << totalSalaryAfterDeductions << endl;
+int main() {
+    do {
+        getData();
+        doOperations();
+        showInfo();
 
         cout << "Do you want to perform another calculation? (Y/N): ";
         cin >> continueCalculation;
