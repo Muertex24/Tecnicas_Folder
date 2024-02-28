@@ -64,6 +64,8 @@ void getData(){
 void showInfo(){
     cout << "\nResults:" << endl;
     cout << fixed << setprecision(2);
+    
+    
     cout << setw(40) << left << "Total salary before deductions:" << "$" << totalSalary << endl;
     cout << setw(40) << left << "Risk (10%):" << "$" << risk << endl;
     cout << setw(40) << left << "ReteICA (1%):" << "$" << reteica << endl;
