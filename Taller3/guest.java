@@ -14,8 +14,11 @@ public class guest {
         guestName = reader.getString("Hola ingrese su nombre");
         guestId = reader.getInt("Ingrese su numero de identificación");
         guestPhone = reader.getInt("Ingrese su numero de telefono");
-        guestAddress = reader.getString("Proporcionenos por favor su ubicación");
 
         return guestInfo;
+    }
+
+    public int checkOut(int roomPrice,int foodConsumed, int daysInRoom){
+        return  roomPrice*daysInRoom+foodConsumed;
     }
 }

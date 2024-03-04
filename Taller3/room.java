@@ -6,6 +6,7 @@ public class room {
     public int roomPrice;
     public String roomState;
     public String stringObject;
+    public int roomId;
     public static String[] rooms;
     public int index = -1;
     public room(){};
@@ -20,9 +21,11 @@ public class room {
                 roomInitialized.roomFloor = i+1;
                 roomInitialized.roomState = "Available";
                 roomInitialized.roomPrice = roomInitialized.roomFloor * 500000;
+                roomId = index+2;
                 index++;
-                stringObject = "RoomNum: " + roomInitialized.roomNum + " RoomFloor: " + roomInitialized.roomFloor + " RoomState: " + roomInitialized.roomState + " RoomPrice: " + roomInitialized.roomPrice;
+                stringObject = "Numero de la habitación: " + roomInitialized.roomNum + " Se encuentra en el piso : " + roomInitialized.roomFloor + " Se encuentra: " + roomInitialized.roomState +" el identificador de la habitación es: " + roomId +" y tiene un precio de: " + roomInitialized.roomPrice;
                 rooms[index] = stringObject;
+                
             }
         }
         return rooms;
