@@ -46,25 +46,24 @@ public class receptionist {
         String input = reader.getString("¿Desea tomar la habitación?");
         switch (input) {
             case "si":
-                System.out.println(rooms[guest.guestRoomNum]);
-                changeState();
+            changeState();
+            System.out.println("Ahora la habitación " + guest.guestRoomNum + " no esta disponible");
                 break;
             case "no": 
                 System.out.println("Entendible tenga buen dia");
                 break;
             default:
-                System.out.println("Eres tonto o masticas agua? , si o no");
+                System.out.println("si o no");
                 break;
         }
     }
 
     public static void changeState(){
         String updatedInput = rooms[guest.guestRoomNum-1].replace("Available", "noAvailable");
-        rooms[guest.guestRoomNum] = updatedInput;
+        rooms[guest.guestRoomNum-1] = updatedInput;
     }
 
 
 
 }
-
 
