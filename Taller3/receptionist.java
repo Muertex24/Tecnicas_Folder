@@ -17,14 +17,19 @@ public class receptionist {
     }
     public void getRoomsState(){
         readAllRooms();
-        int roomInput = reader.getInt("¿Que habitación desea?");
+        int roomInput = reader.getInt(" ¿Que habitación desea?");
         if(roomInput < 0){
             System.out.println("El numero de la habitación debe ser positivo");
         }
         if(roomInput>=0 && roomInput<=100){
             guest.guestRoomNum= roomInput;
+            //validateRooms
             OfferRoom();
         }
+    }
+    
+    public void validateRooms(){
+    	
     }
  
     public static void getRoomPrice() {
@@ -43,18 +48,21 @@ public class receptionist {
     }
 
     public static void OfferRoom(){
-        String input = reader.getString("¿Desea tomar la habitación?");
+        String input = reader.getString("¿Desea tomar la habitación? (si/no)");
         switch (input) {
             case "si":
-            changeState();
-            System.out.println("Ahora la habitación " + guest.guestRoomNum + " no esta disponible");
-                break;
+            	changeState();
+            	System.out.println("Ahora la habitación " + guest.guestRoomNum + " no esta disponible");
+            	hotel.getIntro();
+                break; 
             case "no": 
                 System.out.println("Entendible tenga buen dia");
+                hotel.getIntro();
                 break;
             default:
                 System.out.println("Solo se aceptan respuestas si o no");
                 System.out.println("Vuelva a intentar el proceso de check-in");
+                hotel.getIntro();
                 break;
         }
     }
