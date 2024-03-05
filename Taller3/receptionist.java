@@ -53,7 +53,8 @@ public class receptionist {
                 System.out.println("Entendible tenga buen dia");
                 break;
             default:
-                System.out.println("si o no");
+                System.out.println("Solo se aceptan respuestas si o no");
+                System.out.println("Vuelva a intentar el proceso de check-in");
                 break;
         }
     }

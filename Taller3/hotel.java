@@ -14,14 +14,12 @@ public class hotel {
             System.out.println("Hola señor recepcionista");
         }
         if(answer.equals("guest")){
-            
+            guest.checkIn();
+            receptionist.getRoomsState();   
         }
     }    
 
     public static void main(String[] args) {        
         getIntro();
-        guest.checkIn();
-        receptionist.getRoomsState();
-        // System.out.println(rooms[guest.guestRoomNum]);
     }
 }
