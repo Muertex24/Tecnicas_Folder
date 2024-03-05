@@ -28,9 +28,36 @@ public class receptionist {
         }
     }
     
-    public void validateRooms(){
-    	
+    public void printOccupiedRooms() {
+        System.out.println("Habitaciones ocupadas:");
+        for (int i = 0; i < rooms.length; i++) {
+            if (rooms[i].contains("noAvailable")) {
+                System.out.println("Habitación " + (i + 1));
+            }
+        }
     }
+
+    public double calculateTotalRevenue() {
+        double totalRevenue = 0.0;
+
+        for (int i = 0; i < rooms.length; i++) {
+            if (rooms[i].contains("noAvailable")) {
+                String input = rooms[i];
+                int priceIndex = input.indexOf("y tiene un precio de:");
+
+                if (priceIndex != -1) {
+                    String priceInfo = input.substring(priceIndex + "y tiene un precio de:".length());
+                    priceInfo = priceInfo.trim();
+                    double roomPrice = Double.parseDouble(priceInfo);
+
+                    totalRevenue += roomPrice;
+                }
+            }
+        }
+
+        return totalRevenue;
+    }
+
  
     public static void getRoomPrice() {
             String input = rooms[guest.guestRoomNum-1];
