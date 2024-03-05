@@ -17,8 +17,4 @@ public class guest {
 
         return guestInfo;
     }
-
-    public int checkOut(int roomPrice,int foodConsumed, int daysInRoom){
-        return  roomPrice*daysInRoom+foodConsumed;
-    }
 }
