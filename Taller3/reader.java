@@ -30,5 +30,22 @@ public class reader {
         String dato = sc.next();
         return dato;
     }
+    public boolean getBoolean(String mensaje, boolean showError) {
+        while(true) {
+           System.out.println(mensaje + " (si/no):");
+           String input = this.sc.nextLine().toLowerCase();
+           if (input.equals("si")) {
+              return true;
+           }
+  
+           if (input.equals("no")) {
+              return false;
+           }
+  
+           if (showError) {
+              System.out.println("Respuesta no v\u00e1lida. Por favor, responde si o no.");
+           }
+        }
+     }
 }
 

@@ -13,9 +13,7 @@ public class hotel {
         String answer = reader.getString("¿Eres el recepcionista o un guest?");
         if(answer.equals("recepcionista")){
             System.out.println("Hola señor recepcionista");
-            receptionist.printOccupiedRooms();
-            Revnue = receptionist.calculateTotalRevenue();
-            System.out.println(Revnue);
+            Taller3.receptionist.performOptions();
         }
         if(answer.equals("guest")){
             guest.checkIn();
