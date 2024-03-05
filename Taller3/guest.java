@@ -16,7 +16,6 @@ public class guest {
         validatePhone();
         return guestInfo;
     }
-
     public void getId(){
         guestId = reader.getInt("Ingrese su numero de identificación");
     }

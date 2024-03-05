@@ -21,10 +21,11 @@ public class receptionist {
         if(roomInput < 0){
             System.out.println("El numero de la habitación debe ser positivo");
         }
-        if(roomInput>=0 && roomInput<=100){
+        if(roomInput>=0 && roomInput<=100 && !rooms[roomInput-1].contains("noAvailable")){
             guest.guestRoomNum= roomInput;
-            //validateRooms
             OfferRoom();
+        }else{
+            System.out.println("Habitación ocupada");
         }
     }
     

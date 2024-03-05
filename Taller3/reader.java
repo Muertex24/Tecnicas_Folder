@@ -43,7 +43,7 @@ public class reader {
            }
   
            if (showError) {
-              System.out.println("Respuesta no v\u00e1lida. Por favor, responde si o no.");
+              System.out.println("Respuesta no válida. Por favor, responde si o no.");
            }
         }
      }
